@@ -1,0 +1,78 @@
+/* Success checkmark animation (ring draws -> disc fills in + tick draws).
+   Colocated with signup-success.tsx, which imports this file. */
+@keyframes signup-ring-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes signup-fill-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes signup-check-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes signup-success-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Phase 1: the outline strokes itself anticlockwise (negative offset reveals counter-clockwise) */
+.signup-check-ring {
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: -1;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  animation: signup-ring-draw 0.8s ease-in-out forwards;
+}
+
+/* Phase 2: the green disc fades in once the ring is complete */
+.signup-check-fill {
+  opacity: 0;
+  animation: signup-fill-in 0.6s ease-out 0.6s forwards;
+}
+
+/* Phase 2: the tick draws on top while the disc fills in */
+.signup-check-mark {
+  stroke-width: 3.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: signup-check-draw 0.6s ease-out 0.6s forwards;
+}
+
+.signup-success-content {
+  animation: signup-success-rise 0.5s 0.25s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signup-success-content {
+    animation: none;
+  }
+
+  .signup-check-ring,
+  .signup-check-mark {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .signup-check-fill {
+    animation: none;
+    opacity: 1;
+  }
+}
