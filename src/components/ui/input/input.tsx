@@ -9,6 +9,9 @@ const inputVariants = tv({
       false:
         "border-border-default-default focus-visible:border-border-brand-default focus-visible:ring-background-brand-default/15",
     },
+    hasTrailing: {
+      true: "pr-11",
+    },
   },
   defaultVariants: {
     error: false,
@@ -26,10 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="relative">
         <input
-          className={inputVariants({
-            error,
-            className: trailing ? `pr-11 ${className ?? ""}` : className,
-          })}
+          className={inputVariants({ error, hasTrailing: !!trailing, className })}
           ref={ref}
           {...props}
         />
