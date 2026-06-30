@@ -20,11 +20,10 @@ const inputVariants = tv({
 
 export type InputProps = ComponentProps<"input"> &
   VariantProps<typeof inputVariants> & {
-    /** Element rendered inside the input, anchored to the right (e.g. a password toggle). */
     trailing?: ReactNode;
   };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, error, trailing, ...props }, ref) => {
     return (
       <div className="relative">
@@ -43,5 +42,3 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = "Input";
-
-export { Input, inputVariants };

@@ -231,6 +231,14 @@ code {
 @theme inline {
   --radius: 0.5rem;
 
+  /* Palette steps surfaced as theme tokens so components use utilities
+     (e.g. text-gray-700) instead of raw var() values. Prefer a semantic
+     role token below when one fits before reaching for these. */
+  --color-gray-50: var(--gray-50);
+  --color-gray-200: var(--gray-200);
+  --color-gray-700: var(--gray-700);
+  --color-brand-950: var(--brand-950);
+
   --color-background-brand-default: var(--brand-800);
   --color-background-brand-hover: var(--slate-900);
   --color-background-brand-secondary: var(--brand-200);

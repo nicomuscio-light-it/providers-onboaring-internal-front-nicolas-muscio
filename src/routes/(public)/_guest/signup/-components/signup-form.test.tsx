@@ -61,13 +61,31 @@ beforeEach(() => {
 });
 
 describe("SignupForm", () => {
-  it("shows validation errors and does not submit when fields are empty", async () => {
+  it("disables the submit button while the form is untouched", () => {
     render(<SignupForm onSuccess={vi.fn()} />);
 
+    const button = screen.getByRole("button", { name: /create account/i });
+
+    expect((button as HTMLButtonElement).disabled).toBe(true);
+  });
+
+  it("enables the submit button once a field has been edited", () => {
+    render(<SignupForm onSuccess={vi.fn()} />);
+
+    fireEvent.change(screen.getByLabelText("Full name"), { target: { value: "Jane Doe" } });
+
+    const button = screen.getByRole("button", { name: /create account/i });
+
+    expect((button as HTMLButtonElement).disabled).toBe(false);
+  });
+
+  it("shows validation errors for empty fields once the user has started typing", async () => {
+    render(<SignupForm onSuccess={vi.fn()} />);
+
+    fireEvent.change(screen.getByLabelText("Full name"), { target: { value: "Jane Doe" } });
     submit();
 
-    expect(await screen.findByText("Full name is required")).toBeTruthy();
-    expect(screen.getByText("Email is required")).toBeTruthy();
+    expect(await screen.findByText("Email is required")).toBeTruthy();
     expect(mutate).not.toHaveBeenCalled();
   });
 

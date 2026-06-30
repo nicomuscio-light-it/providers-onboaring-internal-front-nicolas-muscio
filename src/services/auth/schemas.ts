@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export const signupSchema = z
   .object({
     name: z.string().min(1, "Full name is required").max(255),
@@ -9,7 +7,7 @@ export const signupSchema = z
       .string()
       .min(1, "Email is required")
       .max(255)
-      .regex(EMAIL_REGEX, "Enter a valid email address"),
+      .pipe(z.email("Enter a valid email address")),
     password: z
       .string()
       .min(1, "Password is required")
