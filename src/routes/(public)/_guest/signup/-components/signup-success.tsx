@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import { SuccessCheck } from "@/assets/images";
-import { buttonVariants } from "@/components/ui";
+import { buttonVariants, SuccessCheck } from "@/components/ui";
 
 import "./signup-success.css";
 
