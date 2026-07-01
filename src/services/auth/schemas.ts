@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+export const signupPayloadSchema = z.object({
+  name: z.string(),
+  email: z.string(),
+  password: z.string(),
+  password_confirmation: z.string(),
+});
+
 export const signupSchema = z
   .object({
     name: z.string().min(1, "Full name is required").max(255),
