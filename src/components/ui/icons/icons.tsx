@@ -9,6 +9,9 @@ const LUCIDE_PREFIX = "lucide:";
 
 const AVAILABLE_ICONIFY_ICONS = {
   Check: "check",
+  Eye: "eye",
+  EyeOff: "eye-off",
+  Loader: "loader-circle",
 };
 
 export const initializeIcons = () => {
