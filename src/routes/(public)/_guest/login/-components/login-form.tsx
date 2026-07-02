@@ -5,7 +5,7 @@ import { isAxiosError } from "axios";
 import { toast } from "sonner";
 
 import { Button, FormField, Icons, Input, PasswordInput } from "@/components/ui";
-import { type LoginFormValues, type LoginPayload, loginSchema, useLogin } from "@/services";
+import { type LoginFormValues, loginSchema, useLogin } from "@/services";
 import { useAuthStore } from "@/stores";
 
 export const LoginForm = () => {
@@ -29,12 +29,7 @@ export const LoginForm = () => {
   const { isPending: isPendingLogin, mutate: login } = useLogin();
 
   const onSubmit = handleSubmit((values) => {
-    const payload: LoginPayload = {
-      email: values.email,
-      password: values.password,
-    };
-
-    login(payload, {
+    login(values, {
       onError: (error) => {
         if (isAxiosError(error) && error.response?.status === 401) {
           toast.error("Email or password is not valid.");
