@@ -1,5 +1,6 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
+import { useAuthStore } from "@/stores";
 import { Header } from "./-components";
 
 const PrivateLayout = () => {
@@ -15,6 +16,12 @@ const PrivateLayout = () => {
 };
 
 export const Route = createFileRoute("/_private")({
-  // TODO: Add authentication middleware logic to restrict access to private routes.
+  beforeLoad: () => {
+    const { token } = useAuthStore.getState();
+
+    if (!token) {
+      throw redirect({ to: "/login" });
+    }
+  },
   component: PrivateLayout,
 });

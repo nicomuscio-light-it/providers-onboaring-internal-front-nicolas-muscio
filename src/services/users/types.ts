@@ -1,2 +1,5 @@
-// TODO: add here all your user related types.
-export {};
+export type User = {
+  id: number;
+  name: string;
+  emailAddress: string;
+};

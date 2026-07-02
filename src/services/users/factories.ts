@@ -1,6 +1,9 @@
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
-// TODO: user query key factory library to generate your keys
-export const queries = createQueryKeys("users", {});
+export const queries = createQueryKeys("users", {
+  detail: (id: number) => {
+    return { queryKey: [id] };
+  },
+});
 
 export const mutations = {};

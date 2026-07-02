@@ -1,7 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { signup } from "./api";
+import { login, signup } from "./api";
 import { mutations } from "./factories";
+
+export const useLogin = () => {
+  return useMutation({
+    mutationFn: login,
+    mutationKey: mutations.login,
+  });
+};
 
 export const useSignup = () => {
   return useMutation({

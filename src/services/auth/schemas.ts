@@ -1,10 +1,32 @@
 import { z } from "zod";
 
+export const loginPayloadSchema = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+
 export const signupPayloadSchema = z.object({
   name: z.string(),
   email: z.string(),
   password: z.string(),
   password_confirmation: z.string(),
+});
+
+export const loginResponseSchema = z.object({
+  data: z.object({
+    accessToken: z.string(),
+    tokenType: z.string(),
+    expiresIn: z.number(),
+  }),
+});
+
+export const loginSchema = z.object({
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .max(255)
+    .pipe(z.email("Enter a valid email address")),
+  password: z.string().min(1, "Password is required"),
 });
 
 export const signupSchema = z
