@@ -16,6 +16,7 @@ export type ProvidersResultsProps = {
   providers: Provider[];
   total: number;
   perPage: number;
+  initialPage: number;
   isLoading: boolean;
   isFetchingNextPage: boolean;
   hasNextPage: boolean;
@@ -28,6 +29,7 @@ export type ProvidersResultsProps = {
 export const ProvidersResults = memo(
   ({
     hasNextPage,
+    initialPage,
     isFavoritesActive,
     isFetchingNextPage,
     isLoading,
@@ -52,6 +54,9 @@ export const ProvidersResults = memo(
       exit: { opacity: 0, scale: 0.98, transition: { duration: 0.15 } },
     };
     const sentinelRef = useRef<HTMLDivElement>(null);
+    const initialPageCardRef = useRef<HTMLDivElement>(null);
+    const hasScrolledToInitialPageRef = useRef(false);
+    const initialPageStartIndex = (initialPage - 1) * perPage;
 
     useEffect(() => {
       const sentinel = sentinelRef.current;
@@ -72,6 +77,19 @@ export const ProvidersResults = memo(
         return observer.disconnect();
       };
     }, [hasNextPage, isFetchingNextPage, onLoadMore]);
+
+    // On reload with ?page=N, scroll to the first card of that page once its
+    // pages have been restored.
+    useEffect(() => {
+      if (hasScrolledToInitialPageRef.current || initialPage <= 1) {
+        return;
+      }
+
+      if (providers.length > initialPageStartIndex && initialPageCardRef.current) {
+        initialPageCardRef.current.scrollIntoView({ block: "start" });
+        hasScrolledToInitialPageRef.current = true;
+      }
+    }, [initialPage, initialPageStartIndex, providers.length]);
 
     if (isLoading) {
       return (
@@ -99,11 +117,12 @@ export const ProvidersResults = memo(
                   return (
                     <motion.div
                       animate="visible"
-                      className="h-full"
+                      className="h-full scroll-mt-24"
                       custom={index}
                       exit="exit"
                       initial="hidden"
                       key={provider.id}
+                      ref={index === initialPageStartIndex ? initialPageCardRef : undefined}
                       transition={{ layout: { duration: 0.2, ease: "easeOut" } }}
                       variants={cardVariants}
                       layout

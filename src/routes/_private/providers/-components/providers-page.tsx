@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getRouteApi } from "@tanstack/react-router";
 
 import {
@@ -20,6 +20,9 @@ export const ProvidersPage = () => {
   const navigate = routeApi.useNavigate();
 
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
+
+  // The page from the URL at mount, so a reload can scroll to that page's start.
+  const initialPageRef = useRef(search.page ?? 1);
 
   const filters = {
     name: search.search,
@@ -150,6 +153,7 @@ export const ProvidersPage = () => {
 
       <ProvidersResults
         hasNextPage={hasNextPage}
+        initialPage={initialPageRef.current}
         isFavoritesActive={Boolean(search.favorited)}
         isFetchingNextPage={isFetchingNextPage}
         isLoading={isLoading}
