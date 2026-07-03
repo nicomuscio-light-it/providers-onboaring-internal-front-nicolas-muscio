@@ -30,6 +30,42 @@ export const SelectTrigger = ({
   );
 };
 
+export const SelectScrollUpButton = ({
+  className,
+  ...props
+}: ComponentProps<typeof SelectPrimitive.ScrollUpButton>) => {
+  return (
+    <SelectPrimitive.ScrollUpButton
+      className={cn(
+        "flex cursor-default items-center justify-center py-1 text-icon-default-secondary",
+        className,
+      )}
+      data-slot="select-scroll-up-button"
+      {...props}
+    >
+      <Icons.ChevronUp />
+    </SelectPrimitive.ScrollUpButton>
+  );
+};
+
+export const SelectScrollDownButton = ({
+  className,
+  ...props
+}: ComponentProps<typeof SelectPrimitive.ScrollDownButton>) => {
+  return (
+    <SelectPrimitive.ScrollDownButton
+      className={cn(
+        "flex cursor-default items-center justify-center py-1 text-icon-default-secondary",
+        className,
+      )}
+      data-slot="select-scroll-down-button"
+      {...props}
+    >
+      <Icons.ChevronDown />
+    </SelectPrimitive.ScrollDownButton>
+  );
+};
+
 export const SelectContent = ({
   children,
   className,
@@ -40,7 +76,7 @@ export const SelectContent = ({
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         className={cn(
-          "relative z-50 max-h-72 min-w-[8rem] overflow-hidden rounded-md border border-border-default-default bg-background-default-default shadow-lg",
+          "relative z-50 max-h-[var(--radix-select-content-available-height)] min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border border-border-default-default bg-background-default-default shadow-lg",
           position === "popper" && "min-w-[var(--radix-select-trigger-width)]",
           className,
         )}
@@ -49,7 +85,9 @@ export const SelectContent = ({
         sideOffset={4}
         {...props}
       >
+        <SelectScrollUpButton />
         <SelectPrimitive.Viewport className="p-1">{children}</SelectPrimitive.Viewport>
+        <SelectScrollDownButton />
       </SelectPrimitive.Content>
     </SelectPrimitive.Portal>
   );

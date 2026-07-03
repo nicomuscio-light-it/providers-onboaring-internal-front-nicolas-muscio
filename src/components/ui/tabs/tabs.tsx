@@ -41,7 +41,10 @@ export const TabsContent = ({
 }: ComponentProps<typeof TabsPrimitive.Content>) => {
   return (
     <TabsPrimitive.Content
-      className={cn("outline-none", className)}
+      className={cn(
+        "outline-none focus-visible:ring-4 focus-visible:ring-background-brand-default/15",
+        className,
+      )}
       data-slot="tabs-content"
       {...props}
     />

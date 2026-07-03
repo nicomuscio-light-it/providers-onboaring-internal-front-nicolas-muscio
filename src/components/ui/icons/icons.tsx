@@ -10,6 +10,7 @@ const LUCIDE_PREFIX = "lucide:";
 const AVAILABLE_ICONIFY_ICONS = {
   Check: "check",
   ChevronDown: "chevron-down",
+  ChevronUp: "chevron-up",
   Eye: "eye",
   EyeOff: "eye-off",
   Globe: "globe",
