@@ -4,13 +4,9 @@ import { AnimatePresence, motion, type Variants } from "motion/react";
 import type { Provider } from "@/services";
 import { ProviderCard } from "./provider-card";
 import { ProviderCardSkeleton } from "./provider-card-skeleton";
-import { EMPTY_STATE_VARIANT, ProvidersEmptyState } from "./providers-empty-state";
-
-const SKELETON_COUNT = 6;
+import { PROVIDERS_EMPTY_STATE_VALUES, ProvidersEmptyState } from "./providers-empty-state";
 
 const GRID_CLASSNAME = "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3";
-
-const STAGGER_STEP = 0.05;
 
 export type ProvidersResultsProps = {
   providers: Provider[];
@@ -48,7 +44,7 @@ export const ProvidersResults = memo(
         return {
           opacity: 1,
           scale: 1,
-          transition: { duration: 0.25, delay: (index % perPage) * STAGGER_STEP },
+          transition: { duration: 0.25, delay: (index % perPage) * 0.05 },
         };
       },
       exit: { opacity: 0, scale: 0.98, transition: { duration: 0.15 } },
@@ -94,7 +90,7 @@ export const ProvidersResults = memo(
     if (isLoading) {
       return (
         <div className={GRID_CLASSNAME}>
-          {Array.from({ length: SKELETON_COUNT }).map((_, index) => {
+          {Array.from({ length: 6 }).map((_, index) => {
             return <ProviderCardSkeleton key={index} />;
           })}
         </div>
@@ -110,7 +106,9 @@ export const ProvidersResults = memo(
         {providers.length === 0 ? (
           <ProvidersEmptyState
             variant={
-              isFavoritesActive ? EMPTY_STATE_VARIANT.NO_FAVORITES : EMPTY_STATE_VARIANT.NO_RESULTS
+              isFavoritesActive
+                ? PROVIDERS_EMPTY_STATE_VALUES.NO_FAVORITES
+                : PROVIDERS_EMPTY_STATE_VALUES.NO_RESULTS
             }
           />
         ) : (

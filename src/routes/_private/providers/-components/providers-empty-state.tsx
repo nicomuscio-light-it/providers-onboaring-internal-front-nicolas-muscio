@@ -1,26 +1,27 @@
 import { noSearchResult } from "@/assets/images";
 import { Icons } from "@/components/ui";
 
-export const EMPTY_STATE_VARIANT = {
+export const PROVIDERS_EMPTY_STATE_VALUES = {
   NO_RESULTS: "no-results",
   NO_FAVORITES: "no-favorites",
 } as const;
 
-type EmptyStateVariant = (typeof EMPTY_STATE_VARIANT)[keyof typeof EMPTY_STATE_VARIANT];
+type ProvidersEmptyStateValue =
+  (typeof PROVIDERS_EMPTY_STATE_VALUES)[keyof typeof PROVIDERS_EMPTY_STATE_VALUES];
 
-const COPY: Record<EmptyStateVariant, { title: string; subtitle: string }> = {
-  [EMPTY_STATE_VARIANT.NO_RESULTS]: {
+const COPY: Record<ProvidersEmptyStateValue, { title: string; subtitle: string }> = {
+  [PROVIDERS_EMPTY_STATE_VALUES.NO_RESULTS]: {
     title: "No providers found matching your search.",
     subtitle: "Try adjusting your filters.",
   },
-  [EMPTY_STATE_VARIANT.NO_FAVORITES]: {
+  [PROVIDERS_EMPTY_STATE_VALUES.NO_FAVORITES]: {
     title: "You haven't added any favorites yet.",
     subtitle: "Tap the heart on a provider to save them here.",
   },
 };
 
 type ProvidersEmptyStateProps = {
-  variant: EmptyStateVariant;
+  variant: ProvidersEmptyStateValue;
 };
 
 export const ProvidersEmptyState = ({ variant }: ProvidersEmptyStateProps) => {
@@ -28,7 +29,7 @@ export const ProvidersEmptyState = ({ variant }: ProvidersEmptyStateProps) => {
 
   return (
     <div className="flex flex-col items-center gap-4 py-16 text-center">
-      {variant === EMPTY_STATE_VARIANT.NO_RESULTS ? (
+      {variant === PROVIDERS_EMPTY_STATE_VALUES.NO_RESULTS ? (
         <img alt="" className="w-44" src={noSearchResult} />
       ) : (
         <div className="flex size-20 items-center justify-center rounded-full bg-background-default-secondary text-icon-default-tertiary [&_svg]:size-9">
