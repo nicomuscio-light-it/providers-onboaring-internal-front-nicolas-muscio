@@ -4,7 +4,7 @@ import { AnimatePresence, motion, type Variants } from "motion/react";
 import type { Provider } from "@/services";
 import { ProviderCard } from "./provider-card";
 import { ProviderCardSkeleton } from "./provider-card-skeleton";
-import { ProvidersEmptyState } from "./providers-empty-state";
+import { EMPTY_STATE_VARIANT, ProvidersEmptyState } from "./providers-empty-state";
 
 const SKELETON_COUNT = 6;
 
@@ -108,7 +108,11 @@ export const ProvidersResults = memo(
         </p>
 
         {providers.length === 0 ? (
-          <ProvidersEmptyState variant={isFavoritesActive ? "no-favorites" : "no-results"} />
+          <ProvidersEmptyState
+            variant={
+              isFavoritesActive ? EMPTY_STATE_VARIANT.NO_FAVORITES : EMPTY_STATE_VARIANT.NO_RESULTS
+            }
+          />
         ) : (
           <>
             <div className={GRID_CLASSNAME}>

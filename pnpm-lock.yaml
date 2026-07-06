@@ -50,9 +50,6 @@ importers:
       axios:
         specifier: ^1.12.2
         version: 1.12.2
-      class-variance-authority:
-        specifier: ^0.7.1
-        version: 0.7.1
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2175,9 +2172,6 @@ packages:
   ci-info@4.3.1:
     resolution: {integrity: sha512-Wdy2Igu8OcBpI2pZePZ5oWjPC38tmDVx5WKUXKwlLYkA0ozo85sLsLvkBbBn/sZaSCMFOGZJ14fvW9t5/d7kdA==}
     engines: {node: '>=8'}
-
-  class-variance-authority@0.7.1:
-    resolution: {integrity: sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg==}
 
   clean-regexp@1.0.0:
     resolution: {integrity: sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw==}
@@ -6378,10 +6372,6 @@ snapshots:
   chromatic@12.2.0: {}
 
   ci-info@4.3.1: {}
-
-  class-variance-authority@0.7.1:
-    dependencies:
-      clsx: 2.1.1
 
   clean-regexp@1.0.0:
     dependencies:
