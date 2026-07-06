@@ -42,7 +42,7 @@ export const LoginForm = () => {
       onSuccess: ({ accessToken }) => {
         setToken(accessToken);
 
-        return navigate({ to: "/" });
+        return navigate({ to: "/providers" });
       },
     });
   });

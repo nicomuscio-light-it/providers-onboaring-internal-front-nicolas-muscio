@@ -14,6 +14,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PrivateLayoutRouteImport } from './routes/_private/layout'
 import { Route as PrivatePageRouteImport } from './routes/_private/page'
 import { Route as publicGuestLayoutRouteImport } from './routes/(public)/_guest/layout'
+import { Route as PrivateProvidersPageRouteImport } from './routes/_private/providers/page'
 import { Route as publicGuestSignupPageRouteImport } from './routes/(public)/_guest/signup/page'
 import { Route as publicGuestLoginPageRouteImport } from './routes/(public)/_guest/login/page'
 
@@ -36,6 +37,11 @@ const publicGuestLayoutRoute = publicGuestLayoutRouteImport.update({
   id: '/_guest',
   getParentRoute: () => publicRoute,
 } as any)
+const PrivateProvidersPageRoute = PrivateProvidersPageRouteImport.update({
+  id: '/providers/',
+  path: '/providers/',
+  getParentRoute: () => PrivateLayoutRoute,
+} as any)
 const publicGuestSignupPageRoute = publicGuestSignupPageRouteImport.update({
   id: '/signup/',
   path: '/signup/',
@@ -49,11 +55,13 @@ const publicGuestLoginPageRoute = publicGuestLoginPageRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof PrivatePageRoute
+  '/providers': typeof PrivateProvidersPageRoute
   '/login': typeof publicGuestLoginPageRoute
   '/signup': typeof publicGuestSignupPageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof PrivatePageRoute
+  '/providers': typeof PrivateProvidersPageRoute
   '/login': typeof publicGuestLoginPageRoute
   '/signup': typeof publicGuestSignupPageRoute
 }
@@ -63,20 +71,22 @@ export interface FileRoutesById {
   '/(public)': typeof publicRouteWithChildren
   '/(public)/_guest': typeof publicGuestLayoutRouteWithChildren
   '/_private/': typeof PrivatePageRoute
+  '/_private/providers/': typeof PrivateProvidersPageRoute
   '/(public)/_guest/login/': typeof publicGuestLoginPageRoute
   '/(public)/_guest/signup/': typeof publicGuestSignupPageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/signup'
+  fullPaths: '/' | '/providers' | '/login' | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup'
+  to: '/' | '/providers' | '/login' | '/signup'
   id:
     | '__root__'
     | '/_private'
     | '/(public)'
     | '/(public)/_guest'
     | '/_private/'
+    | '/_private/providers/'
     | '/(public)/_guest/login/'
     | '/(public)/_guest/signup/'
   fileRoutesById: FileRoutesById
@@ -116,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicGuestLayoutRouteImport
       parentRoute: typeof publicRoute
     }
+    '/_private/providers/': {
+      id: '/_private/providers/'
+      path: '/providers'
+      fullPath: '/providers'
+      preLoaderRoute: typeof PrivateProvidersPageRouteImport
+      parentRoute: typeof PrivateLayoutRoute
+    }
     '/(public)/_guest/signup/': {
       id: '/(public)/_guest/signup/'
       path: '/signup'
@@ -135,10 +152,12 @@ declare module '@tanstack/react-router' {
 
 interface PrivateLayoutRouteChildren {
   PrivatePageRoute: typeof PrivatePageRoute
+  PrivateProvidersPageRoute: typeof PrivateProvidersPageRoute
 }
 
 const PrivateLayoutRouteChildren: PrivateLayoutRouteChildren = {
   PrivatePageRoute: PrivatePageRoute,
+  PrivateProvidersPageRoute: PrivateProvidersPageRoute,
 }
 
 const PrivateLayoutRouteWithChildren = PrivateLayoutRoute._addFileChildren(

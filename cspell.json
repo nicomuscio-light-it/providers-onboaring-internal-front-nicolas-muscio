@@ -8,5 +8,15 @@
     "dist/",
     "**/*.svg"
   ],
-  "words": ["autodocs", "commitlint", "iconify", "Lngs", "lukemorales", "sonner", "TTFB", "VITE"]
+  "words": [
+    "autodocs",
+    "commitlint",
+    "favorited",
+    "iconify",
+    "Lngs",
+    "lukemorales",
+    "sonner",
+    "TTFB",
+    "VITE"
+  ]
 }

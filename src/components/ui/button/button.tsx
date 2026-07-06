@@ -9,6 +9,8 @@ const buttonVariants = tv({
         "bg-background-brand-default text-text-brand-on-brand hover:bg-background-brand-hover active:bg-background-brand-default disabled:bg-background-disabled-default disabled:text-text-disabled-on-disabled",
       secondary:
         "bg-background-brand-secondary text-text-brand-on-brand-secondary hover:bg-background-brand-secondary-hover active:bg-background-brand-secondary disabled:bg-background-disabled-default disabled:text-text-disabled-on-disabled",
+      outline:
+        "border border-border-default-default bg-background-default-default text-text-default-default hover:bg-background-default-secondary disabled:bg-background-disabled-default disabled:text-text-disabled-on-disabled",
     },
     size: {
       sm: "px-1.5 py-1 text-xs md:px-2 md:py-1.5 md:text-sm",
